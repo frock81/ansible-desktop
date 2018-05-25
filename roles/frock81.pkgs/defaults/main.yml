@@ -32,5 +32,8 @@ distro_pkgs:
   - tinyca
   - wine
   - winetricks
+  - python-psutil
   
 cache_valid_time: 86400
+
+pip_pkgs: []

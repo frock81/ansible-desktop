@@ -9,3 +9,8 @@
   apt:
     name: "{{ item }}"
   with_items: "{{ distro_pkgs }}"
+  
+- name: instala pacotes pip
+  pip:
+    name: "{{ item }}"
+  with_items: "{{ pip_pkgs }}"
