@@ -4,5 +4,6 @@
 
   roles:
     - frock81.pkgs
+    - frock81.gitconfig
 
   
