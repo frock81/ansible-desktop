@@ -1,0 +1,11 @@
+---
+
+- name: atualiza cache apt
+  apt:
+    update_cache: yes
+    cache_valid_time: "{{ cache_valid_time }}"
+
+- name: instala pacotes da distribuição
+  apt:
+    name: "{{ item }}"
+  with_items: "{{ distro_pkgs }}"

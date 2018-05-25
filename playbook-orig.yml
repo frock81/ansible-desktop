@@ -1,0 +1,394 @@
+---
+
+- hosts: all
+
+  vars:
+    debs_dir: debs
+    distro_pkgs:
+      - dconf-editor
+      - vim
+        - bridge-utils
+        - openssh-server
+        - polipo
+        - autossh
+        - python-gpgme
+        - pidgin
+        - mysql-client
+        - virt-manager
+        - remmina
+        - ssl-cert
+        - git
+        - keepass2
+        - htop
+        - atop
+        - vlc
+        - smartmontools
+        - filezilla
+        - nmap
+        - gimp
+        - net-tools
+        - libreoffice-wiki-publisher
+        - libreoffice-writer2latex
+        - libreoffice-writer2xhtml
+        - hwinfo
+        - wireshark
+        - gcc
+        - whois
+        - nbtscan
+        - alacarte
+        - tsocks
+        - meld
+        - tinyca
+        - wine
+        - winetricks
+        - wine-mono0.0.8
+        - wine-gecko2.21
+
+  pre_tasks:
+
+    - name: instalar pacotes da distribuição
+      apt:
+        name: "{{ item }}"
+      with_items: "{{ distro_pkgs }}"
+
+  tasks:
+
+    - name: MANUAL -- setar velocidade do teclado
+      debug:
+        msg: setar velocidade do teclado manualmente em "configurações"
+
+    - name: MANUAL -- instalar o Ansible
+      debug:
+        msg: setar velocidade do teclado manualmente em "configurações"
+
+######################################
+# Instalação de diversos softwares
+######################################
+      
+        
+
+#OBSOLETO: antes de ver que o módulo apt não precisa ter as dependências instaladas antes.
+        # - java-wrappers
+        # - gdebi
+        # - gdebi-core
+        # - gksu
+        # - java-wrappers
+        # - libasound2:i386
+        # - libdbus-1-3:i386
+        # - libexpat1:i386
+        # - libfontconfig1:i386
+        # - libfreetype6:i386
+        # - libgksu2-0
+        # - libice6:i386
+        # - libjpeg62:i386
+        # - libmysqlclient20
+        # - libpng12-0:i386
+        # - libqt4-dbus
+        # - libqt4-declarative
+        # - libqt4-network
+        # - libqt4-script
+        # - libqt4-sql
+        # - libqt4-sql-mysql
+        # - libqt4-xml
+        # - libqt4-xmlpatterns
+        # - libqtcore4
+        # - libqtdbus4
+        # - libqtgui4
+        # - qdbus
+        # - qt-at-spi
+        # - qtchooser
+        # - qtcore4-l10n
+        # - libnss3-tools
+
+#OBSOLETO: antes de descobrir que o módulo apt pode instalar .debs e o dpkg-query -W.
+    # - name: verificar instalação de pacotes deb
+    #   shell: dpkg -l {{ item.package }} | grep 'ii  {{ item.package }}'
+    #   with_items:
+    #     - package: dropbox
+    #       file: dropbox_2015.10.28_amd64.deb
+    #     - package: haroopad
+    #       file: haroopad-v0.13.1-x64.deb
+    #     - package: google-chrome-stable
+    #       file: google-chrome-stable_current_amd64.deb
+    #     - package: lcmc
+    #       file: lcmc_1.7.13-1_all.deb
+    #     - package: master-pdf-editor
+    #       file: master-pdf-editor-4.2.70_qt5.amd64.deb
+    #     - package: opera-stable
+    #       file: opera-stable_46.0.2597.57_amd64.deb
+    #     - package: pclsync
+    #       file: pCloud_Linux_amd64_3.1.1.deb
+    #     - package: pencil
+    #       file: Pencil_3.0.4_amd64.deb
+    #     - package: remarkable
+    #       file: remarkable_1.87_all.deb
+    #     - package: vagrant
+    #       file: vagrant_1.9.7_x86_64.deb
+    #     - package: virtualbox-5.1
+    #       file: virtualbox-5.1_5.1.28-117968~Ubuntu~xenial_amd64.deb
+    #   register: result
+    #   ignore_errors: yes
+    #   changed_when: false
+    #   tags:
+    #     - software
+
+    # - name: instalar diversos .deb
+    #   shell: dpkg -i {{ debs_dir }}/{{ item.item.file }}
+    #   with_items: "{{ result.results }}"
+    #   when: item.rc != 0
+    #   tags:
+    #     - software
+
+    - name: instalar diversos .deb.
+      apt:
+        deb: "{{ debs_dir }}/{{ item }}"
+      with_items:
+        - dropbox_2015.10.28_amd64.deb
+        - haroopad-v0.13.1-x64.deb
+        - google-chrome-stable_current_amd64.deb
+        - lcmc_1.7.13-1_all.deb
+        - master-pdf-editor-4.2.70_qt5.amd64.deb
+        - opera-stable_46.0.2597.57_amd64.deb
+        - pCloud_Linux_amd64_3.1.1.deb
+        - Pencil_3.0.4_amd64.deb
+        - remarkable_1.87_all.deb
+        - vagrant_1.9.7_x86_64.deb
+        - virtualbox-5.1_5.1.28-117968~Ubuntu~xenial_amd64.deb
+        - warsaw_setup_64.deb
+        - teamviewer_12.0.76279_i386.deb
+      tags:
+        - software
+
+#OBSOLETO: antes de descobrir que o módulo apt pode instalar .debs.
+    # - name: verificar se pacote teamviewer está instalado
+    #   shell: dpkg-query -W teamviewer
+    #   register: result
+    #   ignore_errors: yes
+    #   changed_when: false
+    #   tags:
+    #     - software
+
+    # - name: instala dependências para o teamviewer
+    #   command: >
+    #     apt-get install libsm6:i386 libx11-6:i386 libxau6:i386 libxcb1:i386 
+    #     libxdamage1:i386 libxdmcp6:i386 libxext6:i386
+    #   when: result.rc != 0
+    #   tags:
+    #     - software
+
+    # - name: instala teamviewer
+    #   apt:
+    #     deb: "{{ debs_dir }}/teamviewer_12.0.76279_i386.deb"
+    #   tags:
+    #     - softwares
+
+    - name: MANUAL -- mover arquivos do Dropbox antigo
+      debug:
+        msg: >
+          configurar o Dropbox antes de seguir e usar '--extra-vars 
+          "drop_configured=true"' na linha de para prosseguir
+      failed_when: dropbox_configured=false
+
+    - name: verificar se KeePassXC está instalado
+      command: snap list keepassxc
+      register: result
+      tags:
+        - software
+
+    - name: instalar KeePassXC
+      command: snap install keepassxc
+      tags:
+        - software
+      when: result.rc != 0
+
+    - name: PPA para Simple Screen Recorder
+      apt_repository:
+        repo: ppa:maarten-baert/simplescreenrecorder
+      register: result
+
+    - name: Atualiza cache apt
+      apt:
+        update_cache: yes
+      when: result.changed
+
+    - name: Instalar Simple Screen Recorder
+      apt:
+        name: simplescreenrecorder
+    
+    - name: MANUAL -- instalar extensões do gnome shell
+      debug:
+        msg: >
+          dash to dock, impatience, media player indicator, Multi monitors add-on, Pidgin im integration, Topicons plus, User-themes, Gtile
+
+    # - name: criar pasta Aplicativos no home do usuário
+
+    # - name: criar link para o eclipse
+
+    # - name: criar link para o eclipse-workspace
+
+    # - name: criar lançador para o eclipse
+
+#     - name: colocar fabio no grupo Wireshark.
+
+#     - name: instalar o Virtualbox e dependências
+
+#     - name: instalar Virtualbox extension pack
+#       commnad: VBoxManage extpack install --replace Oracle_VM_VirtualBox_Extension_Pack-5.1.28-117968.vbox-extpack
+
+#     - name: instalar o pCloud
+    
+#     - name: instalar Spotify
+    
+#     - name: instalar syncthing syncthing-gtk e syncthing-inotify
+    
+#     - name: instalar Java da Oracle via PPA webupd8
+    
+#     - name: instalar o Freemind
+    
+#     - name: instalar o Sublime Text com a licença
+        # debug:
+        #   msg: ver README na pasta do Sublime em Dotfiles no Dropbox
+    
+    
+#     - name: instalar pip (sudo easy_install pip)
+    
+# ######################################
+# # Navegadores web
+# ######################################
+
+#     - name: entrar no sync do Firefox
+
+#     - name: fazer login no Chrome
+
+    # - name: sign in no push bullet no Chrome
+
+    # - name: sign in no push bullet no Firefox
+
+# ######################################
+# # Config de software
+# ######################################
+
+    - name: MANUAL -- adicionar conta Pidgin.
+      debug:
+        msg: configurar Pidgin.
+
+    # - name: MANUAL -- mesclar pasta do Pidgin do Dropbox
+    #   command: ln -s /home/fabio/Dropbox/Dotfiles/Pidgin/purple/ /home/fabio/.purple
+    
+#     #############
+#     # Misc
+#     #############
+    
+#     - name: configurar .vimrc
+
+#     - name: desabilitar o Network-Manager
+# $ sudo systemctl status network-manager.service
+# $ sudo systemctl stop network-manager.service
+# $ sudo systemctl disable network-manager.service
+
+    # - name: desabilitar o dnsmasq
+    # $ systemctl stop dnsmasq.service
+    # $ systemctl disable dnsmasq.service
+
+# -name: autalizar resolv.conf com nomes de servidores DNS
+# nameserver 10.93.48.105
+# nameserver 10.93.48.107
+# search ic.pcdf.gov.br
+# domain ic.pcdf.gov.br
+    
+#     - name: atualizar bash_history do usuário
+    
+#     - name: atualizar bash_history do root
+    
+#     - name: colocar aplicativos na inicialização da sessão
+#       with_items:
+#         - pidgin
+#         - pcloud
+#         - syncthing
+    
+#     - name: criar links para pastas do Dropbox
+    
+#     #################
+#     # Configurações
+#     #################
+    
+#     - name: configurar Polipo
+    
+#     - name: configurar FoxyProxy
+    
+#     - name: configurar virt-manager
+    
+#     - name: copiar máquinas virtuais
+    
+#     - name: colocar licença do Sublime Text
+    
+#     - name: /etc/gitconfig
+    
+#     - name: configurar postfix
+    
+#     ##############################
+#     # Links para o Dropbox
+#     ##############################
+    
+#     - name: Criar link para pastas no Dropbox
+#       with_items:
+#         - Documentos
+#         - Imagens
+#         - Música
+#         - Vídeos
+# $ rm -rf Documentos/
+# $ ln -s /home/fabio/Dropbox/Documentos/ ~/
+# $ rm -rf Imagens/
+# $ ln -s ~/Dropbox/Imagens/ ~/
+# $ rm -rf Música/ 
+# $ ln -s ~/Dropbox/Músicas/ ~/Música
+# $ rm -rf Vídeos
+# $ ln -s ~/Dropbox/Vídeos/ ~/
+
+    
+#     #################
+#     # Dotfiles
+#     #################
+    
+#     - name: criar link para ~/.remmina
+# $ ln -s  ~/Dropbox/Dotfiles/_remmina/ ~/.remmina
+    
+#     - name: criar link para ~/.ssh do usuário
+    
+#     - name: criar link para ~/.ssh do root
+# $ sudo mv /root/.ssh /root/.ssh-old
+# $ sudo ln -s /home/fabio/Dropbox/Dotfiles/_ssh_root/ /root/.ssh
+    
+#     - name: link para Sublime Text
+
+# link para .purple do Pidgin
+    
+#     - name: criar link para ~/.TinyCA
+# $ ln -s ~/Dropbox/Dotfiles/_TinyCA/ ~/.TinyCA
+
+#     ########################
+#     # Trabalho somente
+#     ########################
+    
+#     - name: montar o disco rígido antigo
+    
+#     - name: configurar interface dummy
+# $ sudo mv /etc/network/interfaces /etc/network/interfaces-orig
+# $ sudo cp /home/fabio/Dropbox/Ansible/files/interfaces /etc/network/
+    
+#     - name: adicionar cacert.pem
+# $ sudo cp /home/fabio/Dropbox/Ansible/files/cacert.pem /etc/ssl/certs/
+    
+#     - name: desabilitar gnome-keyring na inicialização da sessão
+#       when: usando o ambiente gnome
+    
+#     - name: remover pastas da sincronização seletiva do Dropbox
+#       with_items:
+#         - Archive
+#         - Backups
+    
+#     - name: importar certificados de CA nos navegadores
+    
+# - name: configurar smartmontools
+# $ sudo vi /etc/smartd.conf
+# $ sudo vi /etc/default/smartmontools

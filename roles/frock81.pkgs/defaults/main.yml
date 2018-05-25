@@ -1,0 +1,36 @@
+---
+distro_pkgs:
+  - dconf-editor
+  - vim
+  - bridge-utils
+  - openssh-server
+  - polipo
+  - autossh
+  - python-gpgme
+  - pidgin
+  - mysql-client
+  - virt-manager
+  - remmina
+  - ssl-cert
+  - git
+  - keepass2
+  - htop
+  - atop
+  - vlc
+  - smartmontools
+  - filezilla
+  - nmap
+  - gimp
+  - net-tools
+  - hwinfo
+  - wireshark
+  - gcc
+  - whois
+  - nbtscan
+  - alacarte
+  - tsocks
+  - tinyca
+  - wine
+  - winetricks
+  
+cache_valid_time: 86400
