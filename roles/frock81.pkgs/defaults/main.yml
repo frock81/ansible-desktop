@@ -14,6 +14,7 @@ distro_pkgs:
   - ssl-cert
   - git
   - keepass2
+  - keepassx
   - htop
   - atop
   - vlc
@@ -33,6 +34,7 @@ distro_pkgs:
   - wine
   - winetricks
   - python-psutil
+  - simplescreenrecorder
   
 cache_valid_time: 86400
 
@@ -44,3 +46,10 @@ deb_urls:
   - https://remarkableapp.github.io/files/remarkable_1.87_all.deb
   - https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb
   - https://sourceforge.net/projects/lcmc/files/lcmc_1.7.14-1_all.deb/download
+  - https://code-industry.net/public/master-pdf-editor-5.0.08_qt5.amd64.deb
+  - https://download3.operacdn.com/pub/opera/desktop/53.0.2907.68/linux/opera-stable_53.0.2907.68_amd64.deb
+  - https://pencil.evolus.vn/dl/V3.0.4/Pencil_3.0.4_amd64.deb
+  - https://releases.hashicorp.com/vagrant/2.1.1/vagrant_2.1.1_x86_64.deb
+  - https://download.virtualbox.org/virtualbox/5.2.12/virtualbox-5.2_5.2.12-122591~Debian~stretch_amd64.deb
+  - https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+#  - https://cloud.gastecnologia.com.br/brb/warsaw/install/warsaw_setup_64.deb

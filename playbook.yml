@@ -3,7 +3,8 @@
 - hosts: home-pc
 
   roles:
-    - frock81.pkgs
+    - role: frock81.pkgs
+      tags: packages
     - frock81.gitconfig
     - frock81.keyboard
     - role: frock81.dropbox
