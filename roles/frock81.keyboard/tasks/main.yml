@@ -2,7 +2,7 @@
 - name: set do valor do atraso do teclado
   dconf:
     key: "/org/gnome/desktop/peripherals/keyboard/delay"
-    value: uint32 250
+    value: uint32 {{ keyboard_delay }}
     state: present
   become: yes
   become_user: "{{ keyboard_user }}"
@@ -10,7 +10,7 @@
 - name: set do valor do intervalo de repetição do teclado
   dconf:
     key: "/org/gnome/desktop/peripherals/keyboard/repeat-interval"
-    value: uint32 20
+    value: uint32 {{ keyboard_repeat_interval }}
     state: present
   become: yes
   become_user: "{{ keyboard_user }}"

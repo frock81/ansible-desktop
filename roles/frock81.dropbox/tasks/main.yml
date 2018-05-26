@@ -1,0 +1,76 @@
+---
+- name: instalar o Dropbox
+  apt:
+    deb: "{{ dropbox_url }}"
+    
+- name: verificar se o diretório da daemon do Dropbox já existe
+  stat:
+    path: "{{ dropbox_daemon_dir }}"
+  register: db_ddir
+  
+- name: configurar Dropbox manualmente
+  debug:
+    msg: inicie manualmente o Dropbox para a primeira configuração e vinculação
+  when: not db_ddir.stat.exists
+  
+- name: aguardar a criação do diretório do Dropbox para continuar (inicie o Dropbox manualmente)
+  wait_for:
+    path: "{{ dropbox_dir }}"
+  when: not db_ddir.stat.exists
+
+- name: verificar se o Dropbox está em execução
+  command: dropbox running
+  become: yes
+  become_user: "{{ dropbox_user }}"
+  register: result
+  changed_when: False
+  failed_when: False
+  ignore_errors: yes
+    
+- name: parar a daemon do Dropbox
+  command: dropbox stop
+  become: yes
+  become_user: "{{ dropbox_user }}"
+  when: result.rc != 0 and not db_ddir.stat.exists
+  
+- name: stat do diretório do Dropbox
+  stat:
+    path: "{{ dropbox_dir }}"
+  register: result1
+  
+- name: verificar se o diretório já foi renomeado
+  find:
+    path: "{{ dropbox_dir }}"
+  register: result2
+
+- name: renomear diretório criado pela Daemon
+  command: mv {{ dropbox_dir }} {{ dropbox_rename_dir }}
+  when: result1.stat.exists and result2.matched == 0
+  
+- name: garantir ponto de montagem do Dropbox
+  file:
+    path: "{{ dropbox_dir }}"
+    owner: "{{ dropbox_user }}"
+    group: "{{ dropbox_user }}"
+    mode: 0750
+    state: directory
+  
+- name: montar diretório do Dropbox
+  mount:
+    path: "{{ dropbox_dir }}"
+    src: UUID={{ dropbox_device_uuid }}
+    fstype: "{{ dropbox_fstype }}"
+    state: mounted
+    
+- name: inicie o Dropbox manualmente para seguir com a execução
+  command: dropbox running
+  become: yes
+  become_user: "{{ dropbox_user }}"
+  register: result
+  changed_when: False
+  failed_when: False
+  ignore_errors: yes
+  until: result.rc == 1
+  delay: 3
+  retries: 20
+

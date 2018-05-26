@@ -5,4 +5,6 @@
   roles:
     - frock81.pkgs
     - frock81.gitconfig
-    - frock81.keyboard  
+    - frock81.keyboard
+    - role: frock81.dropbox
+      tags: dropbox

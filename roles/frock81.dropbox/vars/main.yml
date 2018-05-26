@@ -1,0 +1,4 @@
+---
+dropbox_rename_dir: /home/{{ dropbox_user }}/Dropbox-OLD
+dropbox_dir: /home/{{ dropbox_user }}/Dropbox
+dropbox_daemon_dir: /home/{{ dropbox_user }}/.dropbox-dist

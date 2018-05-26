@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ROLE_NAME="$1"
-ROLE_DIR=./roles/$ROlE_NAME
+ROLE_DIR=./roles/$ROLE_NAME
 
 create_dirs()
 {
@@ -12,8 +12,8 @@ create_dirs()
 create_files()
 {
   for directory in tasks defaults; do
-    if [ ! -f "$ROLE_DIR/$directory/main.yml"]; then
-      printf -- "--\n\n" > $ROLE_DIR/$directory/main.yml
+    if [ ! -f "$ROLE_DIR/$directory/main.yml" ]; then
+      printf -- "---\n\n" > $ROLE_DIR/$directory/main.yml
     fi
   done
 }

@@ -37,3 +37,10 @@ distro_pkgs:
 cache_valid_time: 86400
 
 pip_pkgs: []
+
+deb_urls:
+  - https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
+  - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - https://remarkableapp.github.io/files/remarkable_1.87_all.deb
+  - https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb
+  - https://sourceforge.net/projects/lcmc/files/lcmc_1.7.14-1_all.deb/download
