@@ -7,7 +7,7 @@ Configurações mexidas:
 - Tempo de atraso do teclado (default 250 ms)
 - Tempo de repetição do teclado (default 20 ms)
 - Tecla modificadora para arrastar janelas (Alt; exemplos: Alt, Super)
-- Habilita redimensionar com botão direito do mouse e tecla modificadora.
+- Habilitar ou não redimensionar com botão direito do mouse e tecla modificadora.
 
 ## Variáveis
 
