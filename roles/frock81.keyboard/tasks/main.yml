@@ -2,15 +2,37 @@
 - name: set do valor do atraso do teclado
   dconf:
     key: "/org/gnome/desktop/peripherals/keyboard/delay"
-    value: uint32 {{ keyboard_delay }}
     state: present
+    value: uint32 {{ keyboard_delay }}
   become: yes
   become_user: "{{ keyboard_user }}"
 
 - name: set do valor do intervalo de repetição do teclado
   dconf:
     key: "/org/gnome/desktop/peripherals/keyboard/repeat-interval"
-    value: uint32 {{ keyboard_repeat_interval }}
     state: present
+    value: uint32 {{ keyboard_repeat_interval }}
   become: yes
   become_user: "{{ keyboard_user }}"
+  
+- name: set do valor da tecla de ação de janela
+  dconf:
+    key: "/org/gnome/desktop/wm/preferences/mouse-button-modifier"
+    state: present
+    value: "'<{{ keyboard_modifier_key }}>'"
+  become: yes
+  become_user: "{{ keyboard_user }}"
+  
+- name: foo
+  dconf:
+    key: "/org/gnome/desktop/wm/preferences/resize-with-right-button"
+    state: present
+    value: "{{ keyboard_resize_with_right_button }}"
+  become: yes
+  become_user: "{{ keyboard_user }}"
+  register: result
+  
+- name: depura valor da chave 
+  debug: var=result
+  
+

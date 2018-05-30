@@ -5,7 +5,12 @@
   roles:
     - role: frock81.pkgs
       tags: packages
-    - frock81.gitconfig
-    - frock81.keyboard
+      
+    - role: frock81.gitconfig
+      tags: git
+      
+    - role: frock81.keyboard
+      tags: keyboard
+      
     - role: frock81.dropbox
       tags: dropbox
