@@ -16,5 +16,5 @@ keyboard_user: fabio
 keyboard_delay: 250
 keyboard_repeat_interval: 20
 keyboard_modifier_key: Alt
-keyboard_resize_with_right_button: true
+keyboard_resize_with_right_button: false
 ```

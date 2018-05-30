@@ -23,7 +23,7 @@
   become: yes
   become_user: "{{ keyboard_user }}"
   
-- name: foo
+- name: habilitar ou desabilitar o botão direito para redimensionar janelas
   dconf:
     key: "/org/gnome/desktop/wm/preferences/resize-with-right-button"
     state: present
@@ -31,8 +31,3 @@
   become: yes
   become_user: "{{ keyboard_user }}"
   register: result
-  
-- name: depura valor da chave 
-  debug: var=result
-  
-
