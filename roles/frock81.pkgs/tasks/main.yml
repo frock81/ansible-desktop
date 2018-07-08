@@ -1,6 +1,31 @@
 ---
+- name: insere chaves de repositórios por url
+  apt_key:
+    url: "{{ item }}"
+    state: present
+  with_items: "{{ pkgs_apt_keys_urls }}"
+  
+- name: insere chaves de repositórios por servidor e id
+  apt_key:
+    keyserver: "{{ item.server }}"
+    id: "{{ item.id }}"
+    state: present
+  with_items: "{{ pkgs_apt_keys_servers_id }}"
+  
+- name: insere repositórios
+  apt_repository:
+    repo: "{{ item.repo }}"
+    state: present
+    filename: "{{ item.filename }}"
+  with_items: "{{ pkgs_apt_repositories }}"
+  register: result
 
-- name: atualiza cache apt
+- name: atualiza cache apt em mudança de repositório
+  apt:
+    update_cache: yes
+  when: result.changed
+
+- name: atualiza cache apt quando antigo
   apt:
     update_cache: yes
     cache_valid_time: "{{ cache_valid_time }}"
@@ -19,3 +44,16 @@
   apt:
     deb: "{{ item }}"
   with_items: "{{ deb_urls }}"
+  
+- name: verifica pacotes snap instalados
+  shell: "snap list | grep {{ item }}"
+  with_items: "{{ pkgs_snap_pkgs }}"
+  register: result
+  ignore_errors: yes
+  changed_when: False
+  #failed_when: False
+  
+- name: instala pacotes snap
+  command: snap install {{ item.item }}
+  with_items: "{{ result.results }}"
+  when: item.rc == 1

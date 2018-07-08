@@ -4,7 +4,7 @@
 
   roles:
     - role: frock81.pkgs
-      tags: packages
+      tags: pkgs
       
     - role: frock81.gitconfig
       tags: git
