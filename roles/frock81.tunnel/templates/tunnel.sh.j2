@@ -1,0 +1,17 @@
+#!/bin/bash
+/usr/bin/autossh {{ '-i ' +  __tunnel_homedir + '/' + __tunnel_key_filename if __tunnel_key_content else '' }} \
+   {{ __tunnel_autossh_common_options }}\
+  -o "UserKnownHostsFile=/dev/null" \
+  -o "StrictHostKeyChecking=no" \
+  -o "ServerAliveInterval {{ __tunnel_alive_interval }}" \
+  -o "ServerAliveCountMax {{ __tunnel_alive_countmax }}" \
+  {% if __tunnel_type == 'remote' %}
+  -R {{ __tunnel_host1 + ':' if __tunnel_host1 else '' }}{{ __tunnel_port1 }}:{{ __tunnel_host2 }}:{{ __tunnel_port2 }} \
+  {% elif __tunnel_type == 'local' %}
+  -L {{ __tunnel_host1 + ':' if __tunnel_host1 else '' }}{{ __tunnel_port1 }}:{{ __tunnel_host2 }}:{{ __tunnel_port2 }} \
+  {% else %}
+  -D {{ __tunnel_host2 }}:{{ __tunnel_port2 }} \
+  {% endif %}
+  -p {{ __tunnel_server_port }} \
+  {{ __tunnel_server_user }}@{{ __tunnel_server_host }}
+  

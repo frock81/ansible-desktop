@@ -1,0 +1,43 @@
+---
+# tasks file for frock81.tunnel
+- name: install autossh
+  apt:
+    name: autossh
+- name: tunnel homedir
+  file:
+    path: "{{ __tunnel_homedir }}"
+    state: directory
+- name: create connection key
+  copy:
+    content: "{{ __tunnel_key_content }}"
+    dest: "{{ __tunnel_homedir }}/{{ __tunnel_key_filename }}"
+    owner: "{{ __tunnel_user }}"
+    mode: '0400'
+  when: __tunnel_key_content != ""
+- name: create wrapper script
+  template:
+    src: tunnel.sh.j2
+    dest: "{{ __tunnel_service_exec }}"
+    owner: "{{ __tunnel_service_user }}"
+    mode: '0750'
+  register: result1
+- name: create service file
+  template:
+    src: tunnel.service.j2
+    dest: /etc/systemd/system/{{ __tunnel_service_name }}.service
+    owner: root
+    group: root
+    mode: '0644'
+  notify: systemd daemon reload
+  register: result2
+- meta: flush_handlers
+- name: restart service
+  systemd:
+    name: "{{ __tunnel_service_name }}.service"
+    state: restarted
+  when: result1.changed or result2.changed
+- name: start and enable service
+  systemd:
+    name: "{{ __tunnel_service_name }}.service"
+    enabled: yes
+    state: started

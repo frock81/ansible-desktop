@@ -1,0 +1,21 @@
+---
+# vars file for frock81.tunnel
+__tunnel_homedir: /opt/tunnel
+__tunnel_service_name: "{{ tunnel_service_name | default('autossh') }}"
+__tunnel_service_description: "{{ tunnel_service_description | default('Autossh tunnel') }}"
+__tunnel_service_user: "{{ tunnel_service_user }}"
+__tunnel_service_exec: "{{ __tunnel_homedir }}/{{ tunnel_service_name | default('tunnel') }}.sh"
+__tunnel_user: "{{ tunnel_user }}"
+__tunnel_key_content: "{{ tunnel_key_content }}"
+__tunnel_key_filename: "{{ tunnel_key_filename | default(__tunnel_service_name + '.key') }}"
+__tunnel_type: "{{ tunnel_type | default('dynamic') }}"
+__tunnel_host1: "{{ tunnel_host1 }}"
+__tunnel_port1: "{{ tunnel_port1 }}"
+__tunnel_host2: "{{ tunnel_host2 }}"
+__tunnel_port2: "{{ tunnel_port2 }}"
+__tunnel_server_port: "{{ tunnel_server_port }}"
+__tunnel_server_user: "{{ tunnel_server_user }}"
+__tunnel_server_host: "{{ tunnel_server_host }}"
+__tunnel_alive_interval: "{{ tunnel_alive_interval }}"
+__tunnel_alive_countmax: "{{ tunnel_alive_countmax }}"
+__tunnel_autossh_common_options: "-M 0 -N -T"

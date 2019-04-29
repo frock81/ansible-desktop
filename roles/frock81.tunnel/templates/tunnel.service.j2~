@@ -1,0 +1,14 @@
+;{{ ansible_managed }}
+[Unit]
+{% if __tunnel_service_description %}
+Description={{ __tunnel_service_description }}
+{% endif %}
+After=network.target
+
+[Service]
+Type=simple
+ExecStart={{ __tunnel_service_exec }}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
