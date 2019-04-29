@@ -1,0 +1,88 @@
+---
+#===============================================================================
+# Repositórios
+#===============================================================================
+pkgs_apt_keys_urls:
+  - https://download.sublimetext.com/sublimehq-pub.gpg
+
+pkgs_apt_keys_servers_id:
+  # Spotify
+  - server: keyserver.ubuntu.com
+    id: 0DF731E45CE24F27EEEB1450EFDC8610341D9410
+  # Spotify
+  - server: keyserver.ubuntu.com
+    id: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+
+pkgs_apt_repositories:
+  - repo: deb https://download.sublimetext.com/ apt/stable/
+    filename: sublime-text
+  - repo: deb http://repository.spotify.com stable non-free
+    filename: spotify
+#===============================================================================
+# Cache
+#===============================================================================
+cache_valid_time: 86400
+
+#===============================================================================
+# Setup
+#===============================================================================
+distro_pkgs:
+  - dconf-editor
+  - vim
+  - bridge-utils
+  - openssh-server
+  - polipo
+  - autossh
+  - python-gpgme
+  - pidgin
+  - mysql-client
+  - virt-manager
+  - remmina
+  - ssl-cert
+  - git
+  - keepass2
+  - keepassx
+  - htop
+  - atop
+  - vlc
+  - smartmontools
+  - filezilla
+  - nmap
+  - gimp
+  - net-tools
+  - hwinfo
+  - wireshark
+  - gcc
+  - whois
+  - nbtscan
+  - alacarte
+  - tsocks
+  - tinyca
+  - wine
+  - winetricks
+  - python-psutil
+  - simplescreenrecorder
+  - snapd
+  - apt-transport-https
+  - sublime-text
+  - spotify-client
+
+pip_pkgs: []
+
+deb_urls:
+  - https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2015.10.28_amd64.deb
+  - https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - https://remarkableapp.github.io/files/remarkable_1.87_all.deb
+  - https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb
+  - https://sourceforge.net/projects/lcmc/files/lcmc_1.7.14-1_all.deb/download
+#  - https://code-industry.net/public/master-pdf-editor-5.0.08_qt5.amd64.deb
+  - https://download3.operacdn.com/pub/opera/desktop/53.0.2907.68/linux/opera-stable_53.0.2907.68_amd64.deb
+  - https://pencil.evolus.vn/dl/V3.0.4/Pencil_3.0.4_amd64.deb
+  - https://releases.hashicorp.com/vagrant/2.1.1/vagrant_2.1.1_x86_64.deb
+  - https://download.virtualbox.org/virtualbox/5.2.12/virtualbox-5.2_5.2.12-122591~Debian~stretch_amd64.deb
+  - https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+#  - https://cloud.gastecnologia.com.br/brb/warsaw/install/warsaw_setup_64.deb
+#  - https://tdf.c3sl.ufpr.br/libreoffice/stable/5.4.7/deb/x86_64/LibreOffice_5.4.7_Linux_x86-64_deb.tar.gz
+
+pkgs_snap_pkgs:
+  - spotify

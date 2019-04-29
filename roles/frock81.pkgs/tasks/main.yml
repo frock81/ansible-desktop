@@ -1,59 +1,154 @@
 ---
-- name: insere chaves de repositórios por url
+#===============================================================================
+# Facts
+#===============================================================================
+- set_fact:
+    pkgs_proxies: "{{ pkgs | selectattr('proxy', 'defined') | list }}"
+    pkgs_keys: >
+      {{ pkgs | selectattr('key', 'defined') | map(attribute='key') | list }}
+    pkgs_repos: >
+      {{ pkgs | selectattr('repo', 'defined') | list }}
+    pkgs_debconf: >
+      {{ pkgs
+      | selectattr('debconf', 'defined')
+      | map(attribute='debconf')
+      | list }}
+    pkgs_apt: "{{ pkgs | selectattr('src', 'undefined') | list }}"
+    pkgs_other: "{{ pkgs | selectattr('src', 'defined') | list }}"
+
+- set_fact:
+    pkgs_keys_src_url: >
+      {{ pkgs_keys | selectattr('src', 'eq', 'url') | list }}
+    pkgs_keys_src_keyserver: >
+      {{ pkgs_keys | selectattr('src', 'eq', 'keyserver') | list }}
+    pkgs_apt_names: >
+      {{ pkgs_apt
+      | selectattr('deb', 'undefined')
+      | map(attribute='name')
+      | list }}
+    pkgs_apt_debs: >
+      {{ pkgs_apt
+      | selectattr('deb', 'defined')
+      | map(attribute='deb')
+      | list }}
+    pkgs_pip: >
+      {{ pkgs_other
+      | selectattr('src', 'equalto', 'pip')
+      | map(attribute='name')
+      | list }}
+    pkgs_snap: >
+      {{ pkgs_other
+      | selectattr('src', 'equalto', 'snap')
+      | map(attribute='name')
+      | list }}
+
+#- debug: var={{ item }}
+#  with_items:
+#    - pkgs_proxies
+#    - pkgs_keys
+#    - pkgs_keys_src_url
+#    - pkgs_keys_src_keyserver
+#    - pkgs_repos
+#    - pkgs_debconf
+#    - pkgs_apt
+#    - pkgs_apt_names
+#    - pkgs_apt_debs
+#    - pkgs_other
+#    - pkgs_pip
+#    - pkgs_snap
+#- meta: end_play
+
+#===============================================================================
+# Proxies
+#===============================================================================
+- name: config de proxies para repositórios que precisam
+  template:
+    src: apt_conf_proxy.j2
+    dest: /etc/apt/apt.conf.d/{{ item.name }}
+    owner: root
+    group: root
+    mode: '0644'
+  with_items: "{{ pkgs_proxies }}"
+
+#===============================================================================
+# Keys
+#===============================================================================
+- name: add repo keys via url
   apt_key:
-    url: "{{ item }}"
-    state: present
-  with_items: "{{ pkgs_apt_keys_urls }}"
+    url: "{{ item.url }}"
+    id: "{{ item.id | default(none) }}"
+    keyring: "{{ item.keyring | default(none) }}"
+  with_items: "{{ pkgs_keys_src_url }}"
   
-- name: insere chaves de repositórios por servidor e id
+- name: add repo keys via keyserver
   apt_key:
-    keyserver: "{{ item.server }}"
+    keyserver: "{{ item.keyserver }}"
     id: "{{ item.id }}"
-    state: present
-  with_items: "{{ pkgs_apt_keys_servers_id }}"
+  with_items: "{{ pkgs_keys_src_keyserver }}"
   
+#===============================================================================
+# Repositories
+#===============================================================================
 - name: insere repositórios
   apt_repository:
     repo: "{{ item.repo }}"
-    state: present
-    filename: "{{ item.filename }}"
-  with_items: "{{ pkgs_apt_repositories }}"
+    filename: "{{ item.name }}"
+  with_items: "{{ pkgs_repos }}"
   register: result
 
-- name: atualiza cache apt em mudança de repositório
+#===============================================================================
+# Cache
+#===============================================================================
+- name: update apt cache when repositories change
   apt:
     update_cache: yes
   when: result.changed
 
-- name: atualiza cache apt quando antigo
+- name: update apt cache when old
   apt:
     update_cache: yes
     cache_valid_time: "{{ cache_valid_time }}"
 
-- name: instala pacotes da distribuição
+#===============================================================================
+# Debconf
+#===============================================================================
+- name: setup debconf
+  debconf:
+    name: "{{ item.name }}"
+    question: "{{ item.question }}"
+    vtype: "{{ item.vtype }}"
+    value: "{{ item.value }}" 
+  with_items: "{{ pkgs_debconf }}"
+
+#===============================================================================
+# Setup
+#===============================================================================
+- name: install apt packages via package name
   apt:
-    name: "{{ item }}"
-  with_items: "{{ distro_pkgs }}"
-  
-- name: instala pacotes pip
-  pip:
-    name: "{{ item }}"
-  with_items: "{{ pip_pkgs }}"
-  
-- name: instala pacotes deb da internet
+    name: "{{ pkgs_apt_names }}"
+
+- name: install apt packages via deb sources
   apt:
     deb: "{{ item }}"
-  with_items: "{{ deb_urls }}"
+  with_items: "{{ pkgs_apt_debs }}"
   
-- name: verifica pacotes snap instalados
+- name: install pip packages
+  pip:
+    name: "{{ pkgs_pip }}"
+  
+- name: check installed snap packages
   shell: "snap list | grep {{ item }}"
-  with_items: "{{ pkgs_snap_pkgs }}"
+  with_items: "{{ pkgs_snap }}"
   register: result
   ignore_errors: yes
   changed_when: False
-  #failed_when: False
-  
-- name: instala pacotes snap
+
+- name: install snap packages
   command: snap install {{ item.item }}
   with_items: "{{ result.results }}"
   when: item.rc == 1
+
+# Available in 2.8
+#- name: install snap packages
+#  snap:
+#    name: "{{  }}"
