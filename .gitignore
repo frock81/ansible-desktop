@@ -1,2 +1,7 @@
 .vault_pass.txt
 *.retry
+
+# Runtime backup files
+*~
+.bak
+.bkp
