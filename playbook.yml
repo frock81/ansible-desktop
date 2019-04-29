@@ -17,7 +17,6 @@
     tunnel_key_filename: "id_rsa-ubuntu@ec2-54-207-33-100.sa-east-1.compute.amazonaws.com.pvt"
   vars_files:
     - vars/secret.yml
-    - vars/temp.yml
   roles:
     - role: frock81.pkgs
       tags: pkgs
