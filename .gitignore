@@ -3,5 +3,5 @@
 
 # Runtime backup files
 *~
-.bak
-.bkp
+*.bak
+*.bkp
