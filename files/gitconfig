@@ -1,0 +1,15 @@
+[user]
+	name = fabio
+	email = fabio.rocha@rocketmail.com
+[color]
+	ui = true
+[alias]
+	st = status
+	co = checkout
+	cm = commit
+	br = branch
+	ci = commit
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	lg = log --pretty=format:'%C(yellow)%h %Cblue%ad %Creset%s' --date=local
+	lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
