@@ -21,6 +21,7 @@
     owner: "{{ __tunnel_service_user }}"
     mode: '0750'
   register: result1
+  notify: restart tunnel service
 - name: create service file
   template:
     src: tunnel.service.j2

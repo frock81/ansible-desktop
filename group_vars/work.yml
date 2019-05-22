@@ -164,7 +164,7 @@ pkgs:
     deb: https://pencil.evolus.vn/dl/V3.0.4/Pencil_3.0.4_amd64.deb
 
   - name: vagrant
-  deb: https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.deb
+    deb: https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.deb
 
   - name: teamviewer
     deb: https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
