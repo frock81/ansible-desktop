@@ -85,7 +85,7 @@ pkgs:
   - name: polipo
   - name: chrome-gnome-shell
   - name: python-jmespath
-  - name: python3-jmespath
+  - name: python-netaddr
 
 #-------------------------------------------------------------------------------
 # Via APT from Repos
