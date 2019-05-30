@@ -84,6 +84,8 @@ pkgs:
   - name: virtualbox-guest-additions-iso
   - name: polipo
   - name: chrome-gnome-shell
+  - name: python-jmespath
+  - name: python3-jmespath
 
 #-------------------------------------------------------------------------------
 # Via APT from Repos
