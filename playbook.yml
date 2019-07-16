@@ -1,14 +1,16 @@
 ---
 - hosts: home-pc
   roles:
+    - role: frock81.ansible_bootstrap
+      tags: boostrap
     - role: frock81.pkgs
       tags: pkgs
     - role: frock81.gitconfig
       tags: git
-    - role: frock81.keyboard
-      tags: keyboard
-    - role: frock81.dropbox
-      tags: dropbox
+    # - role: frock81.keyboard
+    #   tags: keyboard
+    # - role: frock81.dropbox
+    #   tags: dropbox
 - hosts: work
   vars:
     tunnel_server_host: 18.231.176.0

@@ -1,0 +1,203 @@
+---
+#===============================================================================
+# Role frock81.pkgs
+#===============================================================================
+
+# Download URLs for deb files.
+# url_deb_dropbox: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2019.02.14_amd64.deb
+url_deb_google_chrome: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+url_deb_opera: https://download3.operacdn.com/pub/opera/desktop/53.0.2907.68/linux/opera-stable_53.0.2907.68_amd64.deb
+url_deb_remarkable: https://remarkableapp.github.io/files/remarkable_1.87_all.deb
+url_deb_haroopad: https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb
+url_deb_lcmc: https://sourceforge.net/projects/lcmc/files/lcmc_1.7.14-1_all.deb/download
+url_deb_pencil: https://pencil.evolus.vn/dl/V3.0.4/Pencil_3.0.4_amd64.deb
+url_deb_vagrant: https://releases.hashicorp.com/vagrant/2.2.4/vagrant_2.2.4_x86_64.deb
+url_deb_teamviewer: https://download.teamviewer.com/download/linux/teamviewer_amd64.deb
+url_deb_master_pdf_editor: https://code-industry.net/public/master-pdf-editor-5.3.22_qt5.amd64.deb
+url_deb_warsaw: ./files/warsaw_setup_64.deb
+
+# Example:
+#pkgs:
+#  - name: apt-transport-https
+#  - name: google-chrome-stable
+#    deb: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#  - name: sublime-text
+#    key:
+#      src: url
+#      url: https://download.sublimetext.com/sublimehq-pub.gpg
+#    repo: deb https://download.sublimetext.com/ apt/stable/
+#  - name: spotify-client
+#    key:
+#      src: keyserver
+#      id: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+#      keyserver: keyserver.ubuntu.com
+#    repo: deb http://repository.spotify.com stable non-free
+#    proxy:
+#      type: http
+#      url: http://localhost:8123
+#      location: repository.spotify.com
+#  - name: keepassxc
+#    src: snap
+#  - name: oracle-java8-installer
+#    repo: ppa:webupd8team/java
+#    debconf:
+#      name: oracle-java8-installer
+#      question: shared/accepted-oracle-license-v1-1
+#      vtype: boolean
+#      value: true
+pkgs:
+#-------------------------------------------------------------------------------
+# Via APT from Distro
+#-------------------------------------------------------------------------------
+  - name: alacarte
+  - name: apt-transport-https
+  - name: atop
+  - name: autossh
+  - name: bridge-utils
+  - name: chrome-gnome-shell
+  - name: dconf-editor
+  - name: debconf-utils
+  - name: dkms
+  - name: filezilla
+  - name: gcc
+  - name: gcc
+  - name: gimp
+  - name: git
+  - name: htop
+  - name: hwinfo
+  - name: keepass2
+  - name: keepassx
+  - name: keepassxc
+  - name: libqt5core5a
+  - name: linux-headers-generic
+  - name: make
+  - name: meld
+  - name: mysql-client
+  - name: nbtscan
+  - name: net-tools
+  - name: nmap
+  - name: openssh-server
+  - name: pidgin
+  - name: python-gpg
+  - name: python-jmespath
+  - name: python-netaddr
+  - name: python-psutil
+  - name: remmina
+  - name: smartmontools
+  - name: snapd
+  - name: ssl-cert
+  - name: tinyca
+  - name: tinyca
+  - name: tsocks
+  - name: vim
+  - name: virt-manager
+  - name: virtualbox-dkms
+  - name: virtualbox-guest-additions-iso
+  - name: vlc
+  - name: whois
+  - name: winetricks
+  - name: wireshark
+
+#-------------------------------------------------------------------------------
+# Via APT from Repos
+#-------------------------------------------------------------------------------
+#  - name: spotify-client
+#    key:
+#      src: keyserver
+#      id: 931FF8E79F0876134EDDBDCCA87FF9DF48BF1C90
+#      keyserver: keyserver.ubuntu.com
+#    repo: deb http://repository.spotify.com stable non-free
+#    proxy:
+#      type: http
+#      url: http://localhost:8123
+#      location: repository.spotify.com
+
+  - name: simplescreenrecorder
+    repo: ppa:maarten-baert/simplescreenrecorder
+
+  - name: sublime-text
+    repo: deb https://download.sublimetext.com/ apt/stable/
+    key:
+      src: url
+      url: https://download.sublimetext.com/sublimehq-pub.gpg
+
+# Não funciona no Xenial (usar pacote virtualbox-dkms.
+#  - name: virtualbox-6.0
+#    key:
+#      src: url
+#      url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
+#      url: https://www.virtualbox.org/download/oracle_vbox.asc
+#    repo: >-
+#      deb https://download.virtualbox.org/virtualbox/debian
+#      {{ ansible_distribution_release }} contrib
+
+  - name: oracle-java12-installer
+    repo: ppa:linuxuprising/java
+    debconf:
+      name: oracle-java12-installer
+      question: shared/accepted-oracle-license-v1-2
+      vtype: boolean
+      value: true
+
+  # - name: oracle-java8-installer
+  #   repo: ppa:webupd8team/java
+  #   debconf:
+  #     name: oracle-java8-installer
+  #     question: shared/accepted-oracle-license-v1-1
+  #     vtype: boolean
+  #     value: true
+    
+  # - name: oracle-java8-set-default
+  
+  - name: libreoffice
+    repo: ppa:libreoffice/ppa
+
+#-------------------------------------------------------------------------------
+# Via APT from .Debs (attribute `name` optional)
+#-------------------------------------------------------------------------------
+  # - name: dropbox
+  #   deb: "{{ url_deb_dropbox }}"
+
+  - name: google chrome
+    deb: "{{ url_deb_google_chrome }}"
+
+  # - name: opera
+  #   deb: "{{ url_deb_opera }}"
+
+  - name: remarkable
+    deb: "{{ url_deb_remarkable }}"
+
+  - name: haroopad
+    deb: "{{ url_deb_haroopad }}"
+
+  - name: lcmc
+    deb: "{{ url_deb_lcmc }}"
+
+  - name: pencil
+    deb: "{{ url_deb_pencil }}"
+
+  # - name: vagrant
+  #   deb: "{{ url_deb_vagrant }}"
+
+  - name: teamviewer
+    deb: "{{ url_deb_teamviewer }}"
+
+  - name: master pdf editor
+    deb: "{{ url_deb_master_pdf_editor }}"
+
+  - name: warsaw
+    deb: "{{ url_deb_warsaw }}"
+
+#-------------------------------------------------------------------------------
+# Via Snaps
+#-------------------------------------------------------------------------------
+  - name: spotify
+    src: snap
+  # - name: keepassxc
+  #   src: snap
+
+#-------------------------------------------------------------------------------
+# Via Pip
+#-------------------------------------------------------------------------------
+  # - name: zabbix-api
+  #   src: pip
