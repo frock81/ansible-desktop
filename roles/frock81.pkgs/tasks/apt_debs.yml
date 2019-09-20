@@ -1,0 +1,11 @@
+- name: check if package "{{ item.name }}" is installed
+  shell: dpkg -l {{ item.name }} | grep ii
+  ignore_errors: yes
+  changed_when: false
+  register: result
+
+- name: installing package "{{ item.name }}" via deb sources
+  apt:
+    deb: "{{ item.deb }}"
+  when: result.rc == 1
+

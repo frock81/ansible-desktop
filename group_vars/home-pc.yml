@@ -77,6 +77,8 @@ pkgs:
   - name: net-tools
   - name: nmap
   - name: openssh-server
+  - name: php-xml
+  - name: php-mbstring
   - name: pidgin
   - name: python-gpg
   - name: python-jmespath
