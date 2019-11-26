@@ -8,6 +8,7 @@
     - role: frock81.pkgs
       tags: pkgs
 
+    # Better managed via Dotfiles
     - role: frock81.gitconfig
       tags: git
 

@@ -3,13 +3,10 @@
 # Role frock81.pkgs
 #===============================================================================
 
-# NOTES
-# Remarkable markdown editor not working in recent ubuntu versions
-
-
 # Download URLs for deb files.
 url_deb_google_chrome: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-url_deb_remarkable: https://remarkableapp.github.io/files/remarkable_1.87_all.deb
+# Remarkable markdown editor not working in recent ubuntu versions
+#url_deb_remarkable: https://remarkableapp.github.io/files/remarkable_1.87_all.deb
 url_deb_haroopad: https://bitbucket.org/rhiokim/haroopad-download/downloads/haroopad-v0.13.1-x64.deb
 url_deb_lcmc: https://sourceforge.net/projects/lcmc/files/lcmc_1.7.14-1_all.deb/download
 url_deb_pencil: https://pencil.evolus.vn/dl/V3.0.4/Pencil_3.0.4_amd64.deb
