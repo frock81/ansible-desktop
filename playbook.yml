@@ -1,5 +1,5 @@
 ---
-- hosts: home-pc
+- hosts: home_pc
   roles:
     - role: frock81.ansible_bootstrap
       tags: boostrap

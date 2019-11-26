@@ -1,6 +1,6 @@
 localhost ansible_connection=local
 
-[home-pc]
+[home_pc]
 perseus ansible_host=192.168.32.12
 
 [work]

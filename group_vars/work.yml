@@ -146,8 +146,8 @@ pkgs:
 #-------------------------------------------------------------------------------
 # Via APT from Repos
 #-------------------------------------------------------------------------------
-  - name: simplescreenrecorder
-    repo: ppa:maarten-baert/simplescreenrecorder
+  #- name: simplescreenrecorder
+  #  repo: ppa:maarten-baert/simplescreenrecorder
 
   - name: sublime-text
     repo: deb https://download.sublimetext.com/ apt/stable/
