@@ -11,20 +11,7 @@
     - role: frock81.gitconfig
       tags: git
 
-    # - role: frock81.keyboard
-    #   tags: keyboard
-
-    # - role: frock81.dropbox
-    #   tags: dropbox
-
 - hosts: work
-  vars:
-#    tunnel_server_host: 18.231.176.0
-#    tunnel_server_user: ubuntu
-#    tunnel_key_content: "{{ vaulted_tunnel_key_content }}"
-#    tunnel_key_filename: >-
-#      id_rsa-ubuntu@ec2-54-207-33-100.sa-east-1.compute.amazonaws.com.pvt
-
   vars_files:
     - vars/secret.yml
 
@@ -35,23 +22,5 @@
     - role: frock81.keyboard
       tags: keyboard
 
-    # Review list of packages and urls before running playbook.
     - role: frock81.pkgs
       tags: pkgs
-
-#    - role: frock81.tunnel
-#      vars:
-#        tunnel_service_name: ec2-remote-ssh
-#        tunnel_type: remote
-#        tunnel_port1: 9703
-#        tunnel_host2: localhost
-#        tunnel_port2: 22
-
-    # dynamic tunnel for socks proxy
-#    - role: frock81.tunnel
-#      vars:
-#        tunnel_service_name: ec2-dynamic-ssh-socks-proxy
-#        tunnel_type: dynamic
-#        tunnel_host2: "*"
-#        tunnel_port2: 1080
-#      tags: proxy
