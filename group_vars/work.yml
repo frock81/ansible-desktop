@@ -152,6 +152,10 @@ pkgs:
 #-------------------------------------------------------------------------------
 # Via APT from Repos
 #-------------------------------------------------------------------------------
+  # Typeahead behavior for Nautilus
+  - name: nautilus
+    repo: ppa:lubomir-brindza/nautilus-typeahead
+
   - name: libreoffice
     repo: ppa:libreoffice/ppa
 
