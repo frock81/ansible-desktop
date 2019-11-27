@@ -1,3 +1,4 @@
 Role Dotfiles
 Role todo-cli
 Sysctl dropbox fs.inotify.max_user_watches = 1048576
+Config virt-manager @work

@@ -101,6 +101,8 @@ pkgs:
 
   - name: net-tools
 
+  - name: nfs-kerner-server
+
   - name: nmap
 
   - name: openssh-server
