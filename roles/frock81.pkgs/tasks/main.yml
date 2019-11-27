@@ -29,7 +29,6 @@
     pkgs_apt_debs: >
       {{ pkgs_apt
       | selectattr('deb', 'defined')
-      | map(attribute='deb')
       | list }}
     pkgs_pip: >
       {{ pkgs_other
@@ -123,32 +122,28 @@
 #===============================================================================
 # Setup
 #===============================================================================
-- name: install apt packages via package name
-  apt:
-    name: "{{ pkgs_apt_names }}"
+- block:
+    - name: install apt packages via package name
+      include_tasks: apt_names.yml
+      with_items: "{{ pkgs_apt_names }}"
 
-- name: install apt packages via deb sources
-  apt:
-    deb: "{{ item }}"
-  with_items: "{{ pkgs_apt_debs }}"
-  
-- name: install pip packages
-  pip:
-    name: "{{ pkgs_pip }}"
-  
-- name: check installed snap packages
-  shell: "snap list | grep {{ item }}"
-  with_items: "{{ pkgs_snap }}"
-  register: result
+    - name: install apt packages via deb sources
+      include_tasks: apt_debs.yml
+      with_items: "{{ pkgs_apt_debs }}"
+      
+    - name: install pip packages
+      pip:
+        name: "{{ pkgs_pip }}"
+      
+    - name: check installed snap packages
+      shell: "snap list | grep {{ item }}"
+      with_items: "{{ pkgs_snap }}"
+      register: result
+      ignore_errors: yes
+      changed_when: False
+
+    - name: install snap packages
+      command: snap install {{ item.item }}
+      with_items: "{{ result.results }}"
+      when: item.rc == 1
   ignore_errors: yes
-  changed_when: False
-
-- name: install snap packages
-  command: snap install {{ item.item }}
-  with_items: "{{ result.results }}"
-  when: item.rc == 1
-
-# Available in 2.8
-#- name: install snap packages
-#  snap:
-#    name: "{{  }}"

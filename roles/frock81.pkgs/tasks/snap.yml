@@ -1,0 +1,9 @@
+- name: check if snap package "{{ item }}" is installed
+  shell: "snap list | grep {{ item }}"
+  register: result
+  ignore_errors: yes
+  changed_when: False
+
+- name: install snap packages "{{ item }}"
+  command: snap install {{ item }}
+  when: result.rc == 1
