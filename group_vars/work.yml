@@ -119,6 +119,8 @@ pkgs:
 
   - name: remmina
 
+  - name: simplescreenrecorder
+
   - name: smartmontools
 
   - name: snapd
@@ -159,16 +161,6 @@ pkgs:
   - name: libreoffice
     repo: ppa:libreoffice/ppa
 
-  # - name: oracle-java8-installer
-  #   repo: ppa:webupd8team/java
-  #   debconf:
-  #     name: oracle-java8-installer
-  #     question: shared/accepted-oracle-license-v1-1
-  #     vtype: boolean
-  #     value: true
-    
-  # - name: oracle-java8-set-default
-
   - name: oracle-java13-installer
     repo: ppa:linuxuprising/java
     debconf:
@@ -180,9 +172,6 @@ pkgs:
   - name: oracle-java13-set-default
     repo: ppa:linuxuprising/java
   
-  #- name: simplescreenrecorder
-  #  repo: ppa:maarten-baert/simplescreenrecorder
-
   - name: sublime-text
     repo: deb https://download.sublimetext.com/ apt/stable/
     key:
