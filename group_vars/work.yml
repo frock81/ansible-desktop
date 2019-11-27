@@ -77,6 +77,8 @@ pkgs:
 
   - name: git
 
+  - name: gnome-clocks
+
   - name: gnome-tweak-tool
 
   - name: htop
