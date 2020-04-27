@@ -4,5 +4,4 @@ localhost ansible_connection=local
 perseus ansible_host=192.168.32.12
 
 [work]
-#ic69696 ansible_host=10.93.48.147
-ic98941 ansbile_connection=local
+ic134826 ansbile_connection=local

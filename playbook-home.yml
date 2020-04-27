@@ -12,16 +12,3 @@
     - role: frock81.gitconfig
       tags: git
 
-- hosts: work
-  vars_files:
-    - vars/secret.yml
-
-  roles:
-    - role: frock81.ansible_bootstrap
-      tags: boostrap
-
-    - role: frock81.keyboard
-      tags: keyboard
-
-    - role: frock81.pkgs
-      tags: pkgs

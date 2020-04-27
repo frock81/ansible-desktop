@@ -1,0 +1,14 @@
+---
+- hosts: work
+  vars_files:
+    - vars/secret.yml
+
+  roles:
+    - role: robertdebock.bootstrap
+      tags: boostrap
+
+    - role: frock81.keyboard
+      tags: keyboard
+
+    - role: frock81.pkgs
+      tags: pkgs

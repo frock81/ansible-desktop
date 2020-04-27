@@ -101,7 +101,7 @@ pkgs:
 
   - name: net-tools
 
-  - name: nfs-kerner-server
+  - name: nfs-kernel-server
 
   - name: nmap
 
