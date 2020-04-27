@@ -113,9 +113,9 @@ pkgs:
 
   - name: pidgin
 
-  - name: python-gpg
+  - name: python3-gpg
 
-  - name: python-jmespath
+  - name: python3-jmespath
 
   - name: python-netaddr
 
