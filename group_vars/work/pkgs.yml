@@ -113,13 +113,13 @@ pkgs:
 
   - name: pidgin
 
-  - name: python-gpg
+  - name: python3-gpg
 
-  - name: python-jmespath
+  - name: python3-jmespath
 
-  - name: python-netaddr
+  - name: python3-netaddr
 
-  - name: python-psutil
+  - name: python3-psutil
 
   - name: remmina
 
