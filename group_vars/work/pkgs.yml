@@ -113,6 +113,8 @@ pkgs:
 
   - name: pidgin
 
+  - name: profile-sync-daemon
+
   - name: python3-gpg
 
   - name: python3-jmespath
