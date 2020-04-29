@@ -61,6 +61,8 @@ pkgs:
 
   - name: chrome-gnome-shell
 
+  - name: curl
+
   - name: dconf-editor
 
   - name: debconf-utils
