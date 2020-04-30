@@ -81,6 +81,8 @@ pkgs:
 
   - name: gnome-clocks
 
+  - name: gnome-paint
+
   - name: gnome-tweak-tool
 
   - name: htop
@@ -108,6 +110,8 @@ pkgs:
   - name: nmap
 
   - name: openssh-server
+
+  - name: pinta
 
   - name: php-xml
 
