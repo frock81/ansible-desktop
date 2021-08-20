@@ -1,28 +1,57 @@
-#### Requisitos
+#### TL;DR
+
+As of Ubuntu 21.04.
 
 Python/Pip* instalado
 
-	sudo apt install python-pip python3-pip
+```
+$ sudo apt install -y python3-pip
+```
 
-Ansible instalado
+Ansible instalado (como usuario comum mesmo):
 
-	pip install ansible
-	pip3 install ansible
+```
+$ pip3 install ansible
+```
 
+Clone do repositorio:
+
+```
+$ sudo apt install git
+$ mkdir	Desenvolvimento
+$ cd Desenvolvimento
+$ git clone https://github.com/frock81/ansible-desktop.git
+```
+
+<!-- REVIEW -->
 Diretório `~/.local/bin` no PATH:
 
 	export PATH=~/.local/bin:$PATH
 
 PsUtil:
 
-	pip install psutil
-	pip3 install psutil
+```
+$ pip3 install psutil
+```
+
+Configurar o servidor SSH:
+
+
+
+Configurar ssh para conex~ao local:
+
+```
+$ sudo apt install -y openssh-server
+$ 
+```
+
+<!-- REVIEW -->
 
 #### Exemplo
 
 Executar o playbook especificando o target host.
 
-	ansible-playbook playbook.yml -l work
+	ansible-playbook playbook-{env}.yml -l work
 
 O arquivo ansbile.cfg é configurado para usar algumas opções padrão como inventário e _become_.
 
